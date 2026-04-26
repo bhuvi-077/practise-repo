@@ -1,1 +1,1044 @@
 hello conflict
+
+add two numbers without using arithmetic operators
+
+def add(a,b):
+    while b!=0:
+        carry = a & b
+        a = a^b
+        b= carry << 1
+        
+    return a
+num1 = int(input())
+num2 = int(input())
+print("sum is:", add(num1,num2))
+
+---------------------------------------------------------------------------------------------------------------------------
+How will you print the address of a variable without using a pointer?
+
+In Python, we don’t have pointers like in C or C++.
+But every object in Python has a memory address (or reference), and we can access it using the built-in id() function.
+
+x = 42
+print("Value of x:", x)
+print("Address of x:", id(x))
+-----------------------------------------------------------------------------------------------------------------------
+Given a number A, find all factors of A.
+
+class Solution:
+	# @param A : integer
+	# @return a list of integers
+	def allFactors(self, A):
+        list1 = []
+        i = 1
+        while i*i <= A:
+            if A%i==0:
+                list1.append(i)
+                if i != (A//i):
+                    list1.append(A//i)
+            i+=1
+            
+        return sorted(list1)
+----------------------------------------------------------------------------------------------------------------------
+            Problem Description
+Find Lowest Common Multiple of given two integers.Problem Constraints
+1 <= A <= 109
+1 <= B <= 109
+Input Format
+First argument is an integer A.
+Second argument is an integer B.
+Output Format
+Return an integer.
+
+class Solution:
+    # @param A : integer
+    # @param B : integer
+     # @return an long
+    def solve(self, A, B):
+        def gcd(A,B):
+            while B:
+                temp = B
+                B = A%B
+                A = temp
+            return A
+            
+        def LCM(A,B):
+            LCM = (A*B)//gcd(A,B)
+            return LCM
+        return LCM(A,B)
+------------------------------------------------------------------------------------------------------------------
+       Given a string A containing only lowercase characters.
+Find the frequencies of the characters in order of their occurrence.
+Problem Constraints
+1 <= |A| <= 105
+Input Format
+Given a string A.
+Output Format
+Return an array of integer.
+Example Input
+Input 1:
+A = "interviewbit"
+Input 2:
+A = "scaler"
+Example Output
+Output 1:
+[3, 1, 2, 2, 1, 1, 1, 1]
+Output 2:
+[1, 1, 1, 1, 1, 1]
+Example Explanation
+Explanation 1:
+Characters in their order of occurence and frequecies are {'i', 3}, {'n', 1}, {'t', 2}, {'e', 2}, {'r', 1}, {'v', 1}, {'w', 1}, {'b', 1}.
+
+class Solution:
+    # @param A : string
+    # @return a list of integers
+    def solve(self, A):
+        freq = {}
+        order = []
+        for ch in A:
+            if ch not in freq:g
+                freq[ch] = 0
+                order.append(ch)
+            freq[ch] += 1
+            
+        result = []
+        for ch in order:
+            result.append(freq[ch])
+            
+        return result
+        ---------------------------------------------------------------------------------------------------------------------
+Given an integer A which represents a month.
+Find the season according to the month.
+Spring – March to May
+Summer – June to August
+Autumn – September to November
+Winter – December to February
+If the month is out of the range 1 to 12 output should be “Invalid”.
+
+
+Problem Constraints
+1 <= A <= 100
+
+
+Input Format
+Given an integer A.
+
+
+Output Format
+Return a string.
+
+
+Example Input
+Input 1:
+A = 6
+Input 2:
+A = 13
+Example Output
+Output 1:
+"Summer"
+Output 2:
+"Invalid"
+Example Explanation
+Explanation 1:
+6th month is june, in june there is "Summer".
+Explanation 2:
+13th month doesn't exist so "Invalid".
+
+class Solution:
+    # @param A : integer
+    # @return a string
+    def solve(self, A):
+        if A < 1 or A > 12:
+            return "Invalid"
+        
+        if 3 <= A <= 5:
+            return "Spring"
+        elif 6 <= A <= 8:
+            return "Summer"
+        elif 9 <= A <= 11:
+            return "Autumn"
+        else:  # 12, 1, 2
+            return "Winter"
+-----------------------------------------------------------------------------------------------------------------------
+Given a square binary matrix of drimensions N×N.
+Flip the matrix diagonally and return the matrix.
+
+class Solution:
+    # @param A : list of list of integers
+    # @return a list of list of integers
+    def solve(self, A):
+        n = len(A)
+        for i in range(n):
+            for j in range(i+1,n):
+                A[i][j], A[j][i] = A[j][i], A[i][j]
+        return A
+---------------------------------------------------------------------------------------------------------------------------
+types of pattern:
+Right-Angle Triangle
+
+n = 4
+for i in range(1, n+1):
+    print("* " * i)
+
+inverted right angle
+n = 4
+for i in range(n, 0, -1):
+    print("* " * i)
+
+pyramid
+n = 4
+for i in range(1, n+1):
+    print(" " * (n-i) + "* " * i)
+
+diamond
+n = 4
+for i in range(1, n+1):
+    print(" "*(n-i) + "* " * i)
+for i in range(n-1, 0, -1):
+    print(" "*(n-i) + "* " * i)
+
+5. Number Triangle
+1
+1 2
+1 2 3
+1 2 3 4
+? Python
+n = 4
+for i in range(1, n+1):
+    for j in range(1, i+1):
+        print(j, end=" ")
+    print()
+
+Floyd’s Triangle
+1
+2 3
+4 5 6
+7 8 9 10
+? Python
+n = 4
+num = 1
+for i in range(1, n+1):
+    for j in range(1, i+1):
+        print(num, end=" ")
+        num += 1
+    print()
+
+
+pascal triangle:
+
+def generate_pascals_triangle(n):
+    triangle = []
+    for i in range(n):
+        row = [1] * (i + 1)
+        
+        for j in range(1, i):
+            row[j] = triangle[i-1][j-1] + triangle[i-1][j]
+        triangle.append(row)
+        
+    return triangle
+    
+n = int(input("enter number of rows: "))
+result = generate_pascals_triangle(n)
+print(result)
+for i,row in enumerate(result):
+    print(" "*(n-i) + str(row))
+
+ALTERNATE:
+def pascal_triangle(n):
+    for i in range(n):
+        print(" "*(n-i) , end ="")
+        
+        val = 1 
+        for j in range(i+1):
+            print(val, end=" ")
+            val= val*(i-j)//(j+1)
+        print()
+        
+pascal_triangle(5)
+
+
+.Print the following pattern 
+   1   
+  3 2 
+ 6 5 4 
+10 9 8 7 
+10 9 8 7  
+ 6 5 4  
+  3 2  
+
+sol:
+
+def paterrn(n):
+    num = 1 
+    for i in range(1,n+1):
+        print(" "*(n-i), end = " ")
+        start = num + i -1 
+        for j in range(i):
+            print(start - j, end = " ")
+        print()
+        num += i 
+    num -= n 
+    for i in range(n,0,-1):
+        print(" "* (n-i) , end = " ")
+        start = num + i -1
+        for j in range(i):
+            print(start - j, end = " ")
+        print()
+        num -= i - 1 
+        
+        
+n = int(input())
+paterrn(n)
+
+X_pattern:
+def X_pattern(s):
+    n = len(s)
+    for i in range(n):
+        for j in range(n):
+            if i == j or j == n - i - 1 :
+                print(s[j], end = " ")
+            else:
+                print(" " , end = " ")
+        print()
+s = input()
+X_pattern(s)
+======================================================================================
+def pattern_print(n):
+    num = 1
+    for i in range(1, n+1):
+            if i%2 == 1:
+                for j in range(n):
+                    print(num+j, end = " ")
+                num += n
+            else:
+            
+                for j in range(n):
+                    print(num+n-1-j, end = " ")  
+                num += n
+            print()
+                
+
+
+n = int(input())
+pattern_print(n)
+
+"""
+Sample Input:3
+Sample Output:
+1 2 3
+6 5 4
+7 8 9
+"""
+
+---------------------------------------------------------------------------------------------------------------------------
+REVERSE A STRING:
+# Reverse string
+s = "Scaler"
+print(s[::-1])   # reclaS
+
+# Reverse number
+n = 12345
+rev = int(str(n)[::-1])
+print(rev)   # 54321
+using two pointer technique: timecomplexity : O(n), space complexity : O(1)
+s = list("TCS")   # convert to list for mutability
+left = 0
+right = len(s) - 1
+while left < right:
+    s[left], s[right] = s[right], s[left]
+    left += 1
+    right -= 1
+print("".join(s))
+---------------------------------------------------------------------------------------------------------------------------
+def factorial(num2):
+    fact = 1
+    for i in range(1,num2+1):
+        fact *= i
+    return fact
+num2 = int(input())
+print(factorial(num2))
+
+def fibonicci(num3):
+    a,b = 0, 1
+    seq = []
+    for _ in range(0,num3):
+        seq.append(a)
+        a,b = b,a+b
+    return seq
+        
+num3 = int(input())
+print(fibonicci(num3))
+
+s = 'madam'
+print(s==s[::-1])
+num4 = 121
+print(str(num4)==str(num4)[::-1])
+
+def is_prime(num5):
+    if num5 < 2:
+        return False
+    for i in range(2, int(num5**0.5)+1):
+        if num5%i == 0:
+            return False
+    return True
+    
+def prime_range(low,high):
+    primes = []
+    for i in range(low, high+1):
+        if is_prime(i):
+            primes.append(i)
+    return primes
+    
+num5 = int(input())
+print(is_prime(num5))
+low, high = map(int,input().split())
+print(prime_range(low, high))
+
+def armstrong_number(num6):
+    power = len(str(num6))
+    print(power)
+    validate = sum(int(d)**power for d in str(num6))
+    return num6 == validate
+num6 = int(input())
+print(armstrong_number(num6))
+
+def factorial(n):
+    fact = 1
+    for i in range(1, n+1):
+        fact *= i
+    return fact
+def strong_number(num7):
+    s_num = sum(factorial(int(d)) for d in str(num7))
+    return s_num == num7
+    
+num7 = int(input())
+print(strong_number(num7))
+---------------------------------------------------------------------------------------------------------------------------
+
+def max_min_val(arr):
+    return max(arr),min(arr)
+def remove_duplicates(arr):
+    #return list(set(arr))
+    return dict.fromkeys(arr)
+def second_largest(arr):
+    unique = list(set(arr))
+    unique.sort(reverse = True)
+    return unique[1] if len(unique) > 1 else None
+def char_freq(s):
+    freq = {}
+    for ch in s:
+        freq[ch] = freq.get(ch,0)+1 
+    return freq
+    
+def is_anagram(s,b):
+    return sorted(s) == sorted(b)
+    
+def kadane(arr1):                  #find maximum subarray
+    max_so_far = arr1[0]
+    max_ending_here = arr1[0]
+    
+    for i in range(1, len(arr1)):
+        max_ending_here = max(arr1[i] , max_ending_here + arr1[i])
+        max_so_far = max(max_so_far , max_ending_here)
+    return max_so_far
+    
+arr = list(map(int,input().split()))
+s = input("enter any string: ")
+b = input("enter any string: ")
+arr1 = list(map(int, input().split()))
+print(max_min_val(arr))
+print(remove_duplicates(arr))
+print(second_largest(arr))
+print(char_freq(s))
+print(is_anagram(s,b))
+print(kadane(arr1))
+--------------------------------------------------------------------------------------------------------------------------
+def is_leap_year(year: int) -> bool:
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+# Example
+print(is_leap_year(2024))  # True
+print(is_leap_year(1900))  # False
+------------------------------------------------------------------------------------------------------------------------------
+def digital_root(n: int) -> int:
+    while n > 9:
+        n = sum(int(d) for d in str(n))
+    return n
+
+# Example
+print(digital_root(9875))  # 2  (9+8+7+5=29 ? 2+9=11 ? 1+1=2)
+---------------------------------------------------------------------------------------------------------------------------
+ATM transaction logic
+
+class ATM:
+    def __init__(self, initial_balance = 0):
+        self.balance = initial_balance
+        
+    def deposit(self, amount):
+        if amount <= 0:
+            return "Invalid deposit amount"
+        self.balance += amount
+        return f"Deposited {amount}, Balnace = {self.balance}"
+        
+    def withdrawn(self, amount):
+        if amount <= 0:
+            return "Invalid withdrawn amount"
+        if amount > self.balance:
+            return "Insufficient funds"
+        self.balance -= amount
+        return f"withdrew {amount}, Balance = {self.balance}"
+        
+    def check_balance(self):
+        return f"current Balance = {self.balance}"
+in_bal = int(input())
+deposit_amount = int(input())
+withdrew_amount = int(input())
+atm = ATM(in_bal)
+print(atm.check_balance())
+print(atm.deposit(deposit_amount))
+print(atm.withdrawn(withdrew_amount))
+--------------------------------------------------------------------------------------------------------------------------------
+
+In dictionary ,  
+	.items() gives list of (key,value)pairs
+	.values() gives list of values
+-----------------------------------------------------------------------------------------------------------------------------
+class Votingsystem:
+    def __init__(self,candidates):
+        self.votes = {candidate:0 for candidate in candidates}
+        
+    def casting_votes(self,candidate):
+        if candidate not in self.votes:
+            return "Invalid candidate name"
+        self.votes[candidate] += 1 
+        return f"vote casted for {candidate}"
+        
+    def result(self):
+        max_votes = max(self.votes.values())
+        winners = [c for c, v in self.votes.items() if v == max_votes]
+        if len(winners) == 1:
+            return f"winner is {winners[0]}"
+        return f"Tie between {winners[0]} and {winners[1]}"
+        
+vs = Votingsystem(["Alice","border","nina"])
+n= int(input("enter no of voters: "))
+for i in range(n):
+    cand = input("enter your vote: ")
+    print(vs.casting_votes(cand))
+#print(vs.casting_votes("Alice"))
+#print(vs.casting_votes("border"))
+#print(vs.casting_votes("nina"))
+#print(vs.casting_votes("Alice"))
+#print(vs.casting_votes("border"))
+print(vs.result())
+---------------------------------------------------------------------------------------------------------------------------
+import re
+
+def is_valid_email(email: str) -> bool:
+    """
+    Returns True if `email` matches a reasonable email pattern, else False.
+    Pattern allows:
+      - letters, digits, dots, underscores, plus, hyphen in local part
+      - domain with labels separated by dots, each label starts/ends with alnum, may contain hyphens
+      - top-level domain with 2+ letters
+    """
+    pattern = r'^[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}$'
+    return re.match(pattern, email) is not None
+
+# Examples
+print(is_valid_email("john.doe@example.com"))    # True
+print(is_valid_email("user+tag@sub.domain.co"))  # True
+print(is_valid_email("bad@domain"))              # False
+print(is_valid_email("no-at-symbol.com"))        # False
+----------------------------------------------------------------------------------------------------------------------
+library system:
+class Library:
+    def __init__(self):
+        self.books = {}
+        self.borrowed = {}
+        
+        
+    def add_books(self, title:str, count:int = 1) -> str:
+        if count <= 0:
+            "Invalid count"
+            
+        self.books[title] = self.books.get(title,0) + count
+        return f"add {count} copies of {title} books"
+        
+    def borrow_books(self, user:str, title:str)->str:
+        if self.books.get(title,0)<= 0:
+            return f"{title} book is not available"
+        self.books[title] -= 1 
+        self.borrowed.setdefault(user,{})
+        self.borrowed[user][title] = self.borrowed[user].get(title,0) +1 
+        return f"{user} borrowed '{title}'"
+        
+    def return_books(self, user:str, title:str) -> str:
+        if user not in self.borrowed or self.borrowed[user].get(title,0)<= 0:
+            return f"no record of {user} borrowing '{title}'"
+            
+        self.borrowed[user][title] -= 1 
+        if self.borrowed[user][title] == 0:
+            del self.borrowed[user][title]
+        if not self.borrowed[user]:
+            del self.borrowed[user]
+        self.books[title] = self.books.get(title,0) +1 
+        return f"{user} returned '{title}'"
+        
+    def available_books(self):
+        return dict(self.books)
+        
+    def borrowed_by_users(self,user):
+        return f"{user} -> {dict(self.borrowed[user].items())}"
+        
+    def search(self, substring : str):
+        s = substring.lower()
+        return ([t for t in self.books if s in t.lower()])
+        
+lib = Library()
+print(lib.add_books("game of throne" , 4))
+print(lib.add_books("The walking Dead", 5))
+print(lib.add_books("strangers things", 3))
+print(lib.add_books("harry porter", 5))
+print(lib.borrow_books("bhuvi","game of throne"))
+print(lib.borrow_books("Alice","harry porter"))
+print(lib.borrow_books("bhuvi","strangers things"))
+print(lib.return_books("bhuvi","game of throne"))
+print(lib.borrow_books("bhuvi","The walking Dead"))
+print(lib.borrowed_by_users("bhuvi"))
+print(lib.search("er"))
+print(lib.available_books())
+-------------------------------------------------------------------------------------------------------------------------
+  student grading system:
+class GradingSystem:
+    def __init__(self):
+        # student -> marks (0-100)
+        self.records = {}
+
+    def add_student(self, student_id: str, marks: int) -> str:
+        if not (0 <= marks <= 100):
+            return "Invalid marks"
+        self.records[student_id] = marks
+        return f"Recorded {marks} for {student_id}"
+
+    def get_grade(self, marks: int) -> str:
+        if marks < 0 or marks > 100:
+            return "Invalid"
+        if marks >= 90:
+            return "A"
+        elif marks >= 80:
+            return "B"
+        elif marks >= 70:
+            return "C"
+        elif marks >= 60:
+            return "D"
+        else:
+            return "F"
+
+    def student_report(self, student_id: str) -> dict:
+        """Return {'marks': int, 'grade': str} or {'error': msg}"""
+        if student_id not in self.records:
+            return {"error": "Student not found"}
+        marks = self.records[student_id]
+        return {"marks": marks, "grade": self.get_grade(marks)}
+
+    def class_summary(self) -> dict:
+        """Return summary stats: count, average, highest, lowest, grade distribution"""
+        if not self.records:
+            return {"count": 0}
+        marks = list(self.records.values())
+        avg = sum(marks) / len(marks)
+        highest = max(marks)
+        lowest = min(marks)
+        # grade distribution
+        dist = {"A":0,"B":0,"C":0,"D":0,"F":0}
+        for m in marks:
+            dist[self.get_grade(m)] += 1
+        return {
+            "count": len(marks),
+            "average": avg,
+            "highest": highest,
+            "lowest": lowest,
+            "distribution": dist
+        }
+
+# Example usage
+gs = GradingSystem()
+print(gs.add_student("s1", 95))
+print(gs.add_student("s2", 82))
+print(gs.add_student("s3", 68))
+print(gs.add_student("s4", 47))
+print(gs.student_report("s2"))   # {'marks': 82, 'grade': 'B'}
+print(gs.class_summary())
+-----------------------------------------------------------------------------------------------------------------------
+ if ((int)ch >= 48 && (int)ch <= 57) 
+this is method for c language--->  for pyhton use isdigit()
+
+is checking whether the variable ch is a digit character ('0' to '9').
+
+char ch = '5';
+
+if ((int)ch >= 48 && (int)ch <= 57) {
+    printf("ch is a digit\n");
+} else {
+    printf("ch is not a digit\n");
+}
+------------------------------------------------------------------------------------------------------
+def count_numbers(num, digit):
+    s = str(num)
+    count = 0
+    for ch in s:
+        if int(ch) != digit:
+            count += 1
+    return count
+
+Alternative method:
+met1
+def count_numbers(num, digit):
+    return sum(1 for ch in str(num) if int(ch) != digit)
+met 2
+def count_numbers(num, digit):
+    s = str(num)
+    return len(s) - s.count(str(digit))
+            ------------------------------------------------------------------------------------------------------
+def change_password(n):
+    res = []
+    for ch in n:
+        if ord(ch) >= 97 and ord(ch) <= 122:
+            res.append(ch.upper())
+        elif ord(ch) >= 65 and ord(ch) <= 90:
+            res.append(ch.lower())
+    return "".join(res)
+            
+n = input()
+print(change_password(n))
+Alternate:
+Great question ?? Let’s break it down.
+
+---
+
+### ?? `chr()` in Python
+
+* It is a **built-in function** in Python.
+* **Purpose**: Converts an **integer (ASCII / Unicode code point)** into its corresponding **character**.
+
+**Syntax**:
+
+```python
+chr(number)
+```
+
+* `number` must be an integer in the range **0–1,114,111** (the range of Unicode).
+
+---
+
+### ? Examples:
+
+```python
+print(chr(65))   # A
+print(chr(90))   # Z
+print(chr(97))   # a
+print(chr(122))  # z
+print(chr(48))   # 0
+```
+
+Output:
+
+```
+A
+Z
+a
+z
+0
+```
+
+---
+
+### ?? Related function: `ord()`
+
+* Does the **reverse of `chr()`**.
+
+* Converts a **character** ? **ASCII/Unicode integer**.
+
+Example:
+
+```python
+print(ord('A'))  # 65
+print(ord('z'))  # 122
+```
+
+---
+
+? Quick summary:
+
+* `ord('A') ? 65`
+* `chr(65) ? 'A'`
+------------------------------------------------------------------------------------------------------------------
+            
+Sample Input 0
+7 23 -7 13 -34 56 43 -12
+Sample Output 0
+4
+
+def count_positive(n2):
+    
+    count = 0
+    for num in n2:
+        if num >= 0:
+            count += 1
+    return count
+import sys
+data = list(map(int,sys.stdin.readline().split()))
+n1 = data[0]
+n2 = data[1:]
+print(count_positive(n2))
+----------------------------------------------------------------------------------------------------------------------------def scan_barcode(n):
+    alp = ['a','b','c','d','e','f','g','h','i','j']
+    number = str(n)
+    res =[]
+    for num in number:
+        res.append(alp[int(num)])
+    return "".join(res)
+        
+n= int(input())
+print(scan_barcode(n))
+
+Alternate method:
+def barcode_to_code(num):
+    result = ""
+    for digit in str(num):
+        result += chr(97 + int(digit))   # 97 = 'a'
+    return result
+
+# Input
+num = int(input())
+print(barcode_to_code(num))
+Alternate method:
+def scan_barcode(n):
+    alp = ['a','b','c','d','e','f','g','h','i','j']
+    return "".join(alp[int(num)] for num in str(n))
+------------------------------------------------------------------------------------------------------------------------
+to find perfect cube:
+def is_perfect_cube(n):
+    cube_root = round(n**(1/3))
+    return cube_root**3 == n
+-----------------------------------------------------------------------------------------------------------------------
+n = int(input())
+s = str(n)
+def num_to_alp(s):
+    sum1 = 0                                                           ASCII val   upper = 65 to 90 , lower = 97 to 122
+    for ch in s:
+        sum1 = sum1 + int(ch)
+    return (chr(sum1 + 64))
+print(num_to_alp(s))
+-------------------------------------------------------------------------------------------------------------------
+def reverse_number(n):                        # 4031 - 1304 = ?
+    return (n - int(str(n)[::-1]))
+print(reverse_number(n))
+------------------------------------------------------------------------------------------------------------------
+import sys
+def find_out_of_range_numbers(days,min_temp,max_temp):
+    res = []
+    for num in numbers:
+        if num < min_temp or num > max_temp:
+            res.append(str(num))
+    return " ".join(res)
+data = list(map(int, sys.stdin.readline().split()))
+numbers = list(map(int, input().split()))
+days = data[0]
+min_temp = data[1]
+max_temp = data[2]
+print(find_out_of_range_numbers(days,min_temp,max_temp))
+-------------------------------------------------------------------------------------------------------------------
+def armstrong_num(n):
+    digit = [int(d) for d in str(n)]
+    power = len(digit)
+    return n == sum(d**power for d in digit )
+def decode_num(n):
+    digit = [int(d) for d in str(n)]
+    if armstrong_num(n):
+        return sum(d for d in digit if d%2 == 0)
+    else:
+        return sum(d for d in digit if d%2 == 1)
+n = int(input())
+print(decode_num(n))
+------------------------------------------------------------------------------------------------------------------------
+What is Encapsulation?
+Encapsulation means binding data (variables) and methods (functions) into a single unit called a class.
+It also means restricting direct access to some data for security and control
+In simple words:
+Think of a capsule (medicine capsule): it keeps all the ingredients (data + methods) wrapped inside.
+You decide how others access the data (via methods, not directly).
+===========================================================================================
+Geometric progression:
+import sys
+def geomentric_progression(A,R,N):
+    res = A*(R**(N-1)) ### formula for geometric progression
+    return res
+n = list(map(int,sys.stdin.read().strip().split()))
+A = n[0]
+R = n[1]
+N = n[2]
+print(geomentric_progression(A,R,N))
+=====================================================================================
+get highest freq using dictionary:
+def highest_frequency(size, arr):
+    dic = {}
+    for i in arr:
+        dic[i] = dic.get(i, 0) + 1
+    max_values = max(dic.values())
+    res = [v for k , v in dic.items() if v == max_values]
+    return max(res)
+num = list(map(int, input().split()))
+size = num[0]
+arr = num[1:]
+print(highest_frequency(size,arr))
+===================================================================================
+def findSmallestMissingPositive(orderNumbers):
+    # Write your code here
+    n = len(orderNumbers)
+    i = 0
+    while i < n:
+        val = orderNumbers[i]
+        if 1 <= val <= n and orderNumbers[val - 1] != orderNumbers[i]:
+            orderNumbers[i] , orderNumbers[val - 1] = orderNumbers[val - 1], orderNumbers[i]
+        else:
+            i += 1     
+    for i in range(n):
+        if orderNumbers[i] != i+1:
+            return i+1
+    return n+1
+==============================================================================
+def isAlphabeticPalindrome(code):
+    # Write your code here
+    """alps = "".join(ch for ch in code if ch.isalpha())
+    return 1 if alps == alps[::-1] else 0"""
+    
+    i , j = 0 , len(code)-1
+    while i<j:
+        while i<j and not("A" <= code[i] <= "Z" or "a" <= code[i] <= "z"):
+            i += 1
+        while i<j and not("A" <= code[j] <= "Z" or "a" <= code[j] <= "z"):
+            j -= 1
+            
+        if i<j:
+            if code[i].lower() != code[j].lower():
+                return 0
+            i += 1
+            j -= 1
+    return 1
+==================================================================================
+valid parenthesis check:
+def valid_parenthesis_check(s,stack,pairs):
+	for ch in s:
+		if ch in '([{':
+			stack.append(ch)
+		elif not stack or stack[-1] != pairs[ch]:
+			return "not balanced"
+		else:
+			stack.pop()
+	else:
+		return "Balanced"
+s = "{[()]}"
+stack = []
+pairs = {')':'(', ']':'[','}':'{'}
+print(valid_parenthesis_check(s,stack,pairs))
+====================================================================================
+check palindrome in linkedlist
+class ListNode:
+	def __init__(self, val=0, next=None):
+    	self.val = val
+    	self.next = next
+ 
+def is_palindrome(head):
+	vals = []
+	while head:
+        vals.append(head.val)
+    	head = head.next
+	return vals == vals[::-1]
+ 
+# Example usage:
+head = ListNode(1, ListNode(2, ListNode(2, ListNode(1))))
+print(is_palindrome(head))  # Output: True
+=====================================================================================
+def longestConsecutive(nums):
+    num_set = set(nums)      # O(n) time to build
+    longest = 0
+
+    for num in num_set:      # iterate each unique value
+        # only start a sequence if num is the sequence's first element
+        if num - 1 not in num_set:
+            current = num
+            streak = 1
+
+            # expand forward while next value exists
+            while current + 1 in num_set:
+                current += 1
+                streak += 1
+
+            # update best length found
+            longest = max(longest, streak)
+
+    return longest
+==========================================================================================
+arr = [4, 9, 0, 11, 1, 5]                    ######place all zero to left side of array and remaining                  elemnents placed in next to zero as same order it is placed in input array
+
+n = len(arr)
+j = 0  # pointer for position to place 0
+
+for i in range(n):
+    if arr[i] == 0:
+        # shift elements right to bring zero forward
+        temp = arr[i]
+        for k in range(i, j, -1):
+            arr[k] = arr[k - 1]
+        arr[j] = temp
+        j += 1
+print(arr)
+
+=========================================================================================
+num = 1222331           # return the number which number have max frequency value Output:2
+temp = num
+max_freq = 0
+most_freq_digit = 0
+
+while temp > 0:
+    digit = temp % 10
+    temp2 = num
+    count = 0
+
+    while temp2 > 0:
+        if temp2 % 10 == digit:
+            count += 1
+        temp2 //= 10
+
+    if count > max_freq:
+        max_freq = count
+        most_freq_digit = digit
+
+    temp //= 10
+
+print(most_freq_digit)
+===============================================================================
+def solve(S,K):
+    answer = []
+    n = len(S)
+    if n%2 == 0:
+        for i in range(K):
+            answer.append(S)
+    else:
+        for i in range(K):
+            answer.append(S)
+            S = S[::-1]
+    return "".join(answer)
+        
+S = input()
+K = int(input())
+result = solve(S,K)
+print(result)   #########input: abc 3  ,  ab 3 , output: abccbaabc  , ababab
+
+============================================================================
+
+
+
+

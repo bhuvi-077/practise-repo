@@ -5,5 +5,23 @@ on: push
 jobs:
   hello:
     runs-on: windows-latest
+
     steps:
-      - run: echo "hello from Github Actions"
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Verify Maven
+        run: mvn -version
+
+      - name: Run Maven Tests
+        run: mvn test
+
+      - name: Print Message
+        run: echo "hello from GitHub Actions"

@@ -5,23 +5,23 @@ on: push
 jobs:
   hello:
     runs-on: windows-latest
-
     steps:
+      - run: echo "hello from Github Actions"
+  
 
-      - name: Checkout Code
-        uses: actions/checkout@v4
+  test:
+    runs-on: windows-latest
+    steps:
+      -name:checkout code
+       uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      -name: setup python
+       uses: actions/setup-python@v5
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          python-version: '3.11'
 
-      - name: Verify Maven
-        run: mvn -version
+      -name: Install dependencies
+        run: pip install -r requirements.txt
 
-      - name: Run Maven Tests
-        run: mvn test
-
-      - name: Print Message
-        run: echo "hello from GitHub Actions"
+      -name: run tests
+        run: pytest
